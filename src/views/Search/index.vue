@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <!-- 一级路由 -->
-    <router-view></router-view>
-  </div>
+  <div>找房</div>
 </template>
 
 <script>
