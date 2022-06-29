@@ -1,10 +1,20 @@
 import request from '@/untils/request.js'
-export const login = ({ text, password }) => {
+/* 登录 */
+export const login = (username, password) => {
   return request({
     method: 'POST',
     url: '/user/login',
     data: {
-      text, password
+      username, password
     }
+  })
+}
+/**
+ *获取用户个人资料
+ * @returns
+ */
+export const getUserInfo = () => {
+  return request({
+    url: '/user'
   })
 }

@@ -1,13 +1,14 @@
 <template>
   <div>
-    <!-- 账号登录 -->
-    <van-nav-bar left-arrow title="账号登录" />
+    <!-- 账号注册 -->
+    <van-nav-bar left-arrow title="账号注册" />
     <!-- 账号密码区域 -->
     <van-form @submit="onSubmit" submit-on-enter>
       <van-field
         v-model="username"
         name="username"
-        placeholder="请输入账号"
+        placeholder="请输入注册账号"
+        required
         :rules="[
           { required: true, message: '账号' },
           {
@@ -21,6 +22,18 @@
         type="password"
         name="password"
         placeholder="请输入密码"
+        required
+        :rules="[
+          { required: true, message: '密码' },
+          { pattern: /^\d{6,16}$/, message: '密码必须为6-16位纯数字' },
+        ]"
+      />
+      <van-field
+        v-model="password"
+        type="password"
+        name="password"
+        required
+        placeholder="请确认密码"
         :rules="[
           { required: true, message: '密码' },
           { pattern: /^\d{6,16}$/, message: '密码必须为6-16位纯数字' },
@@ -28,46 +41,24 @@
       />
       <div style="margin: 16px">
         <van-button block type="info" class="denglu" native-type="submit"
-          >登录</van-button
+          >注册</van-button
         >
       </div>
     </van-form>
-    <router-link to="/register"
-      ><p class="registered"><a href="javascript:;">还没有账号，去注册~</a></p>
-    </router-link>
   </div>
 </template>
 
 <script>
-import { login } from '@/api/user'
 export default {
   created () { },
   data () {
-    return {
-      username: 'itheima',
-      password: '123456'
-    }
+    return {}
   },
-  methods: {
-    async onSubmit () {
-      try {
-        const res = await login(this.username, this.password)
-        console.log(res)
-        if (res.data.status === 200) {
-          this.$toast.success('登录成功')
-          // 方式1: path跳转
-          this.$router.push({
-            path: 'my'
-          })
-        } else {
-          this.$toast.fail('登录失败，请重试')
-        }
-        // res.data.data
-        // token有效期 2个小时 两种思路 让用户重新登录 refresh_token
-        this.$store.commit('setUser', res.data.body)
-      } catch (err) { console.log(err) }
-    }
-  }
+  methods: {},
+  computed: {},
+  watch: {},
+  filters: {},
+  components: {}
 }
 </script>
 

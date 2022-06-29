@@ -6,12 +6,16 @@ const My = () => import('@/views/My')
 const Search = () => import('@/views/Search')
 const Info = () => import('@/views/Info')
 const Login = () => import('@/views/Login')
+const Register = () => import('@/views/Register')
+const Map = () => import('@/views/Map')
+
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     component: Layout,
+    redirect: '/home',
     children: [
       { path: 'home', component: Home },
       { path: 'my', component: My },
@@ -20,8 +24,17 @@ const routes = [
     ]
   },
   {
-    path: '/user',
+    path: '/login',
     component: Login
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register
+  },
+  {
+    path: '/map',
+    component: Map
   }
 ]
 

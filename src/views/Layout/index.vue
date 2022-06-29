@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 二级路由 -->
-    <router-view> </router-view>
+    <router-view class="main"> </router-view>
     <van-tabbar v-model="active" route>
       <van-tabbar-item replace to="/home" icon="home-o">首页</van-tabbar-item>
       <van-tabbar-item replace to="/search" icon="search">找房</van-tabbar-item>
@@ -28,4 +28,8 @@ export default {
 </script>
 
 <style scoped lang='less'>
+.main {
+  padding-bottom: 100px;
+  background-color: #f5f7f9;
+}
 </style>
