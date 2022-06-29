@@ -7,9 +7,14 @@
       indicator-color="white"
       touchable
     >
-      <van-swipe-item><img src="@/assets/chose.png" alt="" /></van-swipe-item>
-      <van-swipe-item><img src="@/assets/rent.png" alt="" /></van-swipe-item>
-      <van-swipe-item><img src="@/assets/five.png" alt="" /></van-swipe-item>
+      <van-swipe-item v-for="item in images" :key="item.id"
+        ><img
+          :src="`http://liufusong.top:8080${item.imgSrc}`"
+          alt=""
+          v-lazy="img"
+      /></van-swipe-item>
+      <!--  <van-swipe-item><img src="@/assets/rent.png" alt="" /></van-swipe-item>
+      <van-swipe-item><img src="@/assets/five.png" alt="" /></van-swipe-item> -->
     </van-swipe>
     <!-- 搜索 -->
     <div class="search-van">
@@ -27,9 +32,9 @@
           </div> </template
       ></router-link>
     </div>
-    <!-- 整租合租地图-->
+    <!-- 整租合租地图找房去出租-->
     <div class="rentmap">
-      <van-row type="flex" justify="space-around">
+      <van-row class="row" type="flex" justify="space-around">
         <!-- 整租 -->
         <van-col span="4"
           ><div class="Rent">
@@ -71,30 +76,38 @@
     <!-- 租房小组 -->
     <div class="renthouse-rent">
       <van-cell title="租房小组" value="更多" size="large" />
-      <!-- 每个元素的两侧间隔相等 -->
-      <div class="renthouse-rent1">
-        <van-row type="flex" justify="space-around">
-          <van-col span="11"><a href="#">123</a></van-col>
-          <van-col span="11"><a href="#">123</a></van-col>
-        </van-row>
-        <van-row type="flex" justify="space-around">
-          <van-col span="11"><a href="#">123</a></van-col>
-          <van-col span="11"><a href="#">123</a></van-col>
-        </van-row>
-      </div>
+      <!-- 两端对齐 -->
+      <van-row type="flex" justify="space-between">
+        <van-col span="12" v-for="item in rentHomeGroups" :key="item.id">
+          <img class="left" :src="`http://liufusong.top:8080${item.imgSrc}`" alt="" />
+          <div class="right">
+            <p>{{item.title}}</p>
+            <p>{{item.desc}}</p>
+          </div>
+        </van-col>
+      </van-row>
     </div>
   </div>
 </template>
 
 <script>
+import { homeSwiper, homeGroups } from '@/api/home'
 import { Toast } from 'vant'
 /* import { areaList } from '@vant/area-data' */
 export default {
-  created () { },
+  async created () {
+    const res = await homeSwiper()
+    console.log(res)
+    this.images = res.data.body
+    const res1 = await homeGroups(this.area)
+    console.log('res1', res1)
+    this.rentHomeGroups = res1.data.body
+  },
   data () {
     return {
-      value: ''
-      /*  areaList */
+      value: '',
+      images: [],
+      rentHomeGroups: []
     }
   },
   methods: {
@@ -120,7 +133,7 @@ export default {
   text-align: center;
 }
 .van-swipe-item img {
-  width: 750px;
+  width: 100%;
 }
 .rentmap {
   width: 100%;
@@ -152,26 +165,44 @@ export default {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background-color: #f2fbf7;
+  background-color: rgb(221, 239, 221);
   .van-icon {
     padding: 10px;
+    border-radius: 50%;
   }
 }
-.van-row {
+.van-row,
+.row {
   margin-top: 10px;
 }
 .renthouse-rent {
   background-color: #f6f5f6;
-}
-.renthouse-rent1 {
-  padding-bottom: 20px;
-  a {
-    display: block;
-    width: 345px;
-    height: 120px;
-    background-color: #fff;
-    text-align: center;
-    line-height: 120px;
+  .van-row {
+    padding: 0 20px;
+    .van-col {
+      margin: 0 0 20px;
+      width: 345px;
+      height: 120px;
+      background-color: #fff;
+      display: flex;
+      justify-content: start;
+      img {
+        width: 100px;
+        height: 100px;
+        margin: 0 20px;
+      }
+      .right {
+        width: 245px;
+        height: 100px;
+        p {
+          font-size: 28px;
+          margin: unset;
+          color: #333;
+          text-align: center;
+          padding-top: 7px;
+        }
+      }
+    }
   }
 }
 </style>

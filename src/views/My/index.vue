@@ -38,7 +38,7 @@
       <van-grid-item border="false" icon="star-o" text="我的收藏" />
       <van-grid-item border="false" icon="wap-home-o" text="我的出租" />
       <van-grid-item icon="clock-o" text="看房记录" />
-      <van-grid-item icon="idcard-o" text="成为房主" />
+      <van-grid-item icon="idcard" text="成为房主" />
       <van-grid-item icon="user-circle-o" text="个人资料" />
       <van-grid-item icon="service-o" text="联系我们" />
     </van-grid>
@@ -133,7 +133,7 @@ export default {
     height: 55%;
     left: 50%;
     background-color: #fff;
-    bottom: 0;
+    bottom: 20px;
     transform: translateX(-50%);
     box-shadow: 0 0 10px 3px #ddd;
     .denglu-icon {
