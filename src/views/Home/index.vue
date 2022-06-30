@@ -8,10 +8,7 @@
       touchable
     >
       <van-swipe-item v-for="item in images" :key="item.id"
-        ><img
-          :src="`http://liufusong.top:8080${item.imgSrc}`"
-          alt=""
-          v-lazy="img"
+        ><img :src="`http://liufusong.top:8080${item.imgSrc}`" alt=""
       /></van-swipe-item>
       <!--  <van-swipe-item><img src="@/assets/rent.png" alt="" /></van-swipe-item>
       <van-swipe-item><img src="@/assets/five.png" alt="" /></van-swipe-item> -->
@@ -37,7 +34,7 @@
       <van-row class="row" type="flex" justify="space-around">
         <!-- 整租 -->
         <van-col span="4"
-          ><div class="Rent">
+          ><div class="Rent" @click="searchHouse">
             <div class="renticon">
               <van-icon color="#00ae66" size="50px" name="wap-home-o" />
             </div>
@@ -46,7 +43,7 @@
         </van-col>
         <!-- 合租 -->
         <van-col span="4">
-          <div class="Rent">
+          <div class="Rent" @click="searchHouse">
             <div class="renticon">
               <van-icon color="#00ae66" size="50px" name="friends-o" />
             </div>
@@ -55,7 +52,7 @@
         >
         <!-- 地图找房 -->
         <van-col span="4"
-          ><div class="Rent">
+          ><div class="Rent" @click="mapHouse">
             <div class="renticon">
               <van-icon color="#00ae66" size="50px" name="location-o" />
             </div>
@@ -64,7 +61,7 @@
         >
         <!-- 去出租 -->
         <van-col span="4"
-          ><div class="Rent">
+          ><div class="Rent" @click="moreContent">
             <div class="renticon">
               <van-icon color="#00ae66" size="50px" name="newspaper-o" />
             </div>
@@ -75,14 +72,23 @@
     </div>
     <!-- 租房小组 -->
     <div class="renthouse-rent">
-      <van-cell title="租房小组" value="更多" size="large" />
+      <!-- 点击更多，判断是否登录，若登录则跳转到发布房源页面。若未登录则提醒用户登录，并跳转到登录界面 -->
+      <!--  <van-cell title="租房小组" value="更多" size="large" /> -->
+      <div class="more">
+        <h4>租房小组</h4>
+        <h5 @click="moreContent">更多</h5>
+      </div>
       <!-- 两端对齐 -->
       <van-row type="flex" justify="space-between">
         <van-col span="12" v-for="item in rentHomeGroups" :key="item.id">
-          <img class="left" :src="`http://liufusong.top:8080${item.imgSrc}`" alt="" />
+          <img
+            class="left"
+            :src="`http://liufusong.top:8080${item.imgSrc}`"
+            alt=""
+          />
           <div class="right">
-            <p>{{item.title}}</p>
-            <p>{{item.desc}}</p>
+            <p>{{ item.title }}</p>
+            <p>{{ item.desc }}</p>
           </div>
         </van-col>
       </van-row>
@@ -93,8 +99,10 @@
 <script>
 import { homeSwiper, homeGroups } from '@/api/home'
 import { Toast } from 'vant'
+import { mapState } from 'vuex'
 /* import { areaList } from '@vant/area-data' */
 export default {
+  name: 'Home',
   async created () {
     const res = await homeSwiper()
     console.log(res)
@@ -116,9 +124,32 @@ export default {
     },
     onCancel () {
       Toast('取消')
+    },
+    moreContent () {
+      if (this.user && this.user.token) {
+        this.$router.push({
+          path: '/relase'
+        })
+      } else {
+        this.$router.push({
+          path: '/login'
+        })
+      }
+    },
+    mapHouse () {
+      this.$router.push({
+        path: '/map'
+      })
+    },
+    searchHouse () {
+      this.$router.push({
+        path: '/search'
+      })
     }
   },
-  computed: {},
+  computed: {
+    ...mapState(['user'])
+  },
   watch: {},
   filters: {},
   components: {}
@@ -177,6 +208,20 @@ export default {
 }
 .renthouse-rent {
   background-color: #f6f5f6;
+  .more {
+    margin: 30px 20px;
+    display: flex;
+    justify-content: space-between;
+    h4 {
+      font-size: 30px;
+      margin: unset;
+    }
+    h5 {
+      font-size: 28px;
+      font-weight: normal;
+      margin: unset;
+    }
+  }
   .van-row {
     padding: 0 20px;
     .van-col {

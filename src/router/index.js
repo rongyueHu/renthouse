@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from '@/views/Layout'// 父页面不用懒加载
-const Home = () => import('@/views/Home')
-const My = () => import('@/views/My')
-const Search = () => import('@/views/Search')
-const Info = () => import('@/views/Info')
-const Login = () => import('@/views/Login')
-const Register = () => import('@/views/Register')
-const Map = () => import('@/views/Map')
+const Home = () => import('@/views/Home')// 首页
+const My = () => import('@/views/My')// 我的
+const Search = () => import('@/views/Search')// 找房
+const Info = () => import('@/views/Info')// 资讯
+const Login = () => import('@/views/Login')// 登录
+const Register = () => import('@/views/Register')// 注册
+const Map = () => import('@/views/Map')// 百度地图
+const Relase = () => import('@/views/Relase')// 发布房源
+const CityList = () => import('@/views/CityList')// 城市列表
 
 Vue.use(VueRouter)
 
@@ -35,7 +37,15 @@ const routes = [
   {
     path: '/map',
     component: Map
+  },
+  {
+    path: '/relase',
+    component: Relase
+  }, {
+    path: '/citylist',
+    component: CityList
   }
+
 ]
 
 const router = new VueRouter({

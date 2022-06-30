@@ -30,6 +30,6 @@ export default {
 <style scoped lang='less'>
 .main {
   padding-bottom: 100px;
-  background-color: #f5f7f9;
+  /*   background-color: #f5f7f9; */
 }
 </style>
