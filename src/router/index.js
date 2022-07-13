@@ -10,6 +10,9 @@ const Register = () => import('@/views/Register')// 注册
 const Map = () => import('@/views/Map')// 百度地图
 const Relase = () => import('@/views/Relase')// 发布房源
 const CityList = () => import('@/views/CityList')// 城市列表
+const Collection = () => import('@/views/Collection')// 我的收藏
+const HouseInfo = () => import('@/views/HouseInfo')// 具体房源
+const SearchInfo = () => import('@/views/SearchInfo')// 搜索房源
 
 Vue.use(VueRouter)
 
@@ -44,6 +47,15 @@ const routes = [
   }, {
     path: '/citylist',
     component: CityList
+  }, {
+    path: '/collection',
+    component: Collection
+  }, {
+    path: '/houseinfo',
+    component: HouseInfo
+  }, {
+    path: '/searchinfo',
+    component: SearchInfo
   }
 
 ]

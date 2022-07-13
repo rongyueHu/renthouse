@@ -4,6 +4,8 @@ import router from './router'
 import store from './store'
 import Vant from 'vant'
 import 'vant/lib/index.less'
+import '@/styles/icon.less'
+import '@/styles/reset.less'
 import 'amfe-flexible'// 直接引入组件,移动端适配
 
 Vue.use(Vant)

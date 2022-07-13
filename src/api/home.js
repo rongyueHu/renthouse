@@ -32,6 +32,7 @@ export const areaCity = (level = 1) => {
     }
   })
 }
+
 /**
  *热门城市
  * @returns
@@ -53,5 +54,27 @@ export const housesCondition = (id = 'AREA|88cff55c-aaa4-e2e0',
   return request({
     url: '/houses',
     params: { id, area, subway, rentType, price, more, roomType, oriented, characteristic, floor, start, end }
+  })
+}
+/**
+ *查询房屋具体信息
+ * @param {/houses/{id}} id
+ * @returns
+ */
+export const houseInfo = (id = '5cc4494549926d0e2b94c816') => {
+  return request({
+    url: `/houses/${id}`,
+    params: { id }
+  })
+}
+/**
+ * 获取房屋查询条件
+ * @param {*} id
+ * @returns
+ */
+export const HousesCondition = () => {
+  return request({
+    url: '/houses/condition',
+    params: { id: 'AREA|88cff55c-aaa4-e2e0' }
   })
 }

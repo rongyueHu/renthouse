@@ -1,7 +1,12 @@
 <template>
   <div>
     <!-- 房源列表 -->
-    <div class="house_list" v-for="(item, index) in houselist" :key="index">
+    <div
+      class="house_list"
+      v-for="(item, index) in houselist"
+      :key="index"
+      @click="jump"
+    >
       <div class="left">
         <img :src="`http://liufusong.top:8080${item.houseImg}`" alt="" />
       </div>
@@ -36,6 +41,11 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+    jump () {
+      this.$router.push({
+        path: '/houseinfo'
+      })
     }
   },
   computed: {},
@@ -73,8 +83,9 @@ export default {
       font-size: 24px;
     }
     .p2 {
-      width: 92px;
+      width: 100px;
       height: 40px;
+      line-height: 20px;
       background-color: #e1f5f8;
       color: #39becd;
       font-size: 26px;

@@ -14,21 +14,15 @@
       <van-swipe-item><img src="@/assets/five.png" alt="" /></van-swipe-item> -->
     </van-swipe>
     <!-- 搜索 -->
-    <div class="search-van">
-      <van-search
-        v-model="value"
-        label="北京 |"
-        placeholder="请输入小区或地址"
-        @search="onSearch"
-      >
-      </van-search>
-      <router-link to="/map">
-        <template>
-          <div class="map-search">
-            <van-icon size="20" name="location-o" />
-          </div> </template
-      ></router-link>
+    <div class="search">
+      <div class="location" @click="$router.push('/citylist')">
+        <span>{{ $store.state.houseName }}</span>
+        <van-icon name="arrow-down" />
+      </div>
+      <van-search v-model="value" placeholder="请输入搜索关键词" />
     </div>
+    <!-- 地图图标 -->
+    <van-icon class="location-se" name="location-o" color="#fff" />
     <!-- 整租合租地图找房去出租-->
     <div class="rentmap">
       <van-row class="row" type="flex" justify="space-around">
@@ -171,18 +165,51 @@ export default {
   height: 204.82px;
   margin: 8px 0;
 }
-.search-van {
+/* .search-van {
   .van-search {
     position: absolute;
     top: 25px;
     margin-left: 100px;
-    padding: 10px 0;
+    padding: 5px 0;
   }
   .map-search {
     position: absolute;
     top: 35px;
     margin-left: 600px;
   }
+} */
+/* 搜索框 */
+.search {
+  display: flex;
+  position: absolute;
+  top: 40px;
+  width: 620px;
+  height: 68px;
+  padding: 10px 10px 10px 25px;
+  background-color: #fff;
+  margin: 0 30px;
+  .location {
+    width: 100px;
+    height: 68px;
+    display: flex;
+    span {
+      display: block;
+      width: 60px;
+      font-size: 28px;
+    }
+    .van-icon-arrow-down {
+      margin-left: 2px;
+      font-size: 12px;
+      color: #7f7f80;
+      text-align: center;
+      padding-top: 10px;
+    }
+  }
+}
+.location-se {
+  position: absolute;
+  top: 46px;
+  right: 32px;
 }
 .Rent {
   h2 {
@@ -209,7 +236,8 @@ export default {
 .renthouse-rent {
   background-color: #f6f5f6;
   .more {
-    margin: 30px 20px;
+    margin: 0 20px 30px;
+    padding-top: 30px;
     display: flex;
     justify-content: space-between;
     h4 {

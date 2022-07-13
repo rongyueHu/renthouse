@@ -4,6 +4,7 @@ const instance = axios.create({ // 创建axios实例instance
   baseURL: 'http://liufusong.top:8080/' // 基础接口
 /*   timeout: 10000 // 响应时间10s，超出报错 */
 })
+
 export default instance // 导出axios实例
 // 请求拦截器：一堆ajax请求配置项都要做的事情，就可以提取到请求拦截器，只需要写一次
 // 添加请求拦截器

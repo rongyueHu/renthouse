@@ -35,7 +35,12 @@
     </div>
     <!-- 6宫格 -->
     <van-grid :column-num="3">
-      <van-grid-item border="false" icon="star-o" text="我的收藏" />
+      <van-grid-item
+        @click="moreContent"
+        border="false"
+        icon="star-o"
+        text="我的收藏"
+      />
       <van-grid-item border="false" icon="wap-home-o" text="我的出租" />
       <van-grid-item icon="clock-o" text="看房记录" />
       <van-grid-item icon="idcard" text="成为房主" />
@@ -80,6 +85,17 @@ export default {
         })
         this.$store.commit('setUser', null)
       } catch (err) { console.log(err) }
+    },
+    moreContent () {
+      if (this.user && this.user.token) {
+        this.$router.push({
+          path: '/collection'
+        })
+      } else {
+        this.$router.push({
+          path: '/login'
+        })
+      }
     }
   },
   computed: {
